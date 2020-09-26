@@ -1,10 +1,12 @@
 package com.biddydev.twitterclone.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "comments")
-public class Comment
+@Table(name = "tweets")
+public class Tweet
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,15 +19,14 @@ public class Comment
     @JoinColumn(name = "userid")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tweetid")
-    private Tweet tweet;
+    @OneToMany(mappedBy = "tweet", orphanRemoval = true)
+    private Set<Comment> comments = new HashSet<>();
 
-    public Comment()
+    public Tweet()
     {
     }
 
-    public Comment(String content, User user)
+    public Tweet(String content, User user)
     {
         this.content = content;
         this.user = user;
@@ -61,13 +62,13 @@ public class Comment
         this.user = user;
     }
 
-    public Tweet getTweet()
+    public Set<Comment> getComments()
     {
-        return tweet;
+        return comments;
     }
 
-    public void setTweet(Tweet tweet)
+    public void setComments(Set<Comment> comments)
     {
-        this.tweet = tweet;
+        this.comments = comments;
     }
 }

@@ -24,6 +24,9 @@ public class User
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private Set<Comment> comments = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private Set<Tweet> tweets = new HashSet<>();
+
     public User()
     {
     }
@@ -73,5 +76,15 @@ public class User
     public void setPassword(String password)
     {
         this.password = password;
+    }
+
+    public Set<Comment> getComments()
+    {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments)
+    {
+        this.comments = comments;
     }
 }

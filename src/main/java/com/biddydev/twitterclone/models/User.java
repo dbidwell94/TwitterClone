@@ -27,6 +27,9 @@ public class User
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private Set<Tweet> tweets = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private Set<UserRoles> roles = new HashSet<>();
+
     public User()
     {
     }
@@ -86,5 +89,25 @@ public class User
     public void setComments(Set<Comment> comments)
     {
         this.comments = comments;
+    }
+
+    public Set<Tweet> getTweets()
+    {
+        return tweets;
+    }
+
+    public void setTweets(Set<Tweet> tweets)
+    {
+        this.tweets = tweets;
+    }
+
+    public Set<UserRoles> getRoles()
+    {
+        return roles;
+    }
+
+    public void setRoles(Set<UserRoles> roles)
+    {
+        this.roles = roles;
     }
 }

@@ -1,6 +1,8 @@
 package com.biddydev.twitterclone.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
@@ -12,6 +14,9 @@ public class Role
 
     @Column(nullable = false, unique = true)
     private String name;
+
+    @OneToMany(mappedBy = "role", orphanRemoval = true)
+    private Set<UserRoles> users = new HashSet<>();
 
     public Role()
     {
@@ -40,5 +45,15 @@ public class Role
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public Set<UserRoles> getUsers()
+    {
+        return users;
+    }
+
+    public void setUsers(Set<UserRoles> users)
+    {
+        this.users = users;
     }
 }

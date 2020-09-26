@@ -1,6 +1,8 @@
 package com.biddydev.twitterclone.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -18,6 +20,9 @@ public class User
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private Set<Comment> comments = new HashSet<>();
 
     public User()
     {
